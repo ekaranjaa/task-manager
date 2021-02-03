@@ -10,6 +10,8 @@ employee can login and see the tasks assigned
 
 ## Build Setup
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/4d9dc11d-35f8-4ee6-90ae-46102335b74c/deploy-status)](https://app.netlify.com/sites/taskmanagr/deploys)
+
 ```bash
 # install dependencies
 $ yarn install

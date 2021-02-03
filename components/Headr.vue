@@ -12,10 +12,10 @@
         </div>
         <nuxt-link
           to="/auth/login"
-          class="px-6 py-3 inline-flex items-center bg-blue-500 text-white hover:bg-yellow-400 transition"
+          class="cta px-6 py-3 inline-flex items-center bg-blue-500 text-white hover:bg-yellow-400 transition"
         >
           Get Started
-          <span class="ml-4 h-6 w-6 grid place-items-center">
+          <span class="ml-2 h-6 w-6 grid place-items-center transition-all">
             <right-arrow />
           </span>
         </nuxt-link>
@@ -32,3 +32,9 @@ export default {
   components: { RightArrow }
 };
 </script>
+
+<style scoped>
+.cta:hover > span {
+  margin-left: 1rem;
+}
+</style>

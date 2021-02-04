@@ -11,8 +11,8 @@
           </h2>
         </div>
         <nuxt-link
-          to="/auth/login"
-          class="cta px-6 py-3 inline-flex items-center bg-blue-500 text-white hover:bg-yellow-400 transition"
+          to="/auth/register"
+          class="cta px-6 py-3 inline-flex items-center bg-blue-500 text-white hover:bg-yellow-400 focus:bg-yellow-400 transition"
         >
           Get Started
           <span class="ml-2 h-6 w-6 grid place-items-center transition-all">
@@ -34,7 +34,8 @@ export default {
 </script>
 
 <style scoped>
-.cta:hover > span {
+.cta:hover > span,
+.cta:focus > span {
   margin-left: 1rem;
 }
 </style>

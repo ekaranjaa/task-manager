@@ -1,6 +1,5 @@
 <template>
   <svg
-    class="icon line"
     width="100%"
     height="100%"
     xmlns="http://www.w3.org/2000/svg"
@@ -8,10 +7,10 @@
   >
     <polyline
       points="14 5 21 12 14 19"
-      fill="none"
-      stroke="#fff"
+      :fill="fill"
+      :stroke="stroke"
       stroke-linecap="round"
-      stroke-join="round"
+      stroke-linejoin="round"
       stroke-width="1.5"
     ></polyline>
     <line
@@ -19,15 +18,27 @@
       y1="12"
       x2="3"
       y2="12"
-      fill="none"
-      stroke="#fff"
+      :fill="fill"
+      :stroke="stroke"
       stroke-linecap="round"
-      stroke-join="round"
+      stroke-linejoin="round"
       stroke-width="1.5"
     ></line>
   </svg>
 </template>
 
 <script>
-export default {};
+export default {
+  name: 'RightArrow',
+  props: {
+    fill: {
+      type: String,
+      default: 'none'
+    },
+    stroke: {
+      type: String,
+      default: 'currentColor'
+    }
+  }
+};
 </script>

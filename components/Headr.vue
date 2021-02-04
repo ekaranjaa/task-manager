@@ -11,7 +11,7 @@
           </h2>
         </div>
         <nuxt-link
-          to="/auth/register"
+          to="/dashboard"
           class="cta px-6 py-3 inline-flex items-center bg-blue-500 text-white hover:bg-yellow-400 focus:bg-yellow-400 transition"
         >
           Get Started

@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import Navbar from '@/components/Navbar.vue';
+import Navbar from '@/components/Navigation/Navbar.vue';
 import Footr from '@/components/Footr.vue';
 
 export default {

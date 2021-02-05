@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import MiniNav from '@/components/MiniNav.vue';
+import MiniNav from '@/components/Navigation/MiniNav.vue';
 import Footr from '@/components/Footr.vue';
 
 export default {

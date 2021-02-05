@@ -3,8 +3,8 @@
 </template>
 
 <script>
-import TitleBar from '@/components/TitleBar.vue';
 import { mapActions } from 'vuex';
+import TitleBar from '@/components/Navigation/TitleBar.vue';
 
 export default {
   components: { TitleBar },

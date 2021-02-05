@@ -1,0 +1,74 @@
+<template>
+  <svg
+    width="70%"
+    height="70%"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+  >
+    <path
+      d="M7.54,19H4a1,1,0,0,1-1-1V5A1,1,0,0,1,4,4H20a1,1,0,0,1,1,1V18a1,1,0,0,1-1,1H16.46"
+      fill="none"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="1"
+    ></path>
+    <line
+      x1="16"
+      y1="3"
+      x2="16"
+      y2="6"
+      fill="none"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="1"
+    ></line>
+    <line
+      x1="8"
+      y1="3"
+      x2="8"
+      y2="6"
+      fill="none"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="1"
+    ></line>
+    <circle
+      cx="12"
+      cy="15"
+      r="6"
+      fill="none"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="1"
+    ></circle>
+    <line
+      x1="3"
+      y1="9"
+      x2="21"
+      y2="9"
+      fill="none"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="1"
+    ></line>
+    <polyline
+      points="10 16 11 17 14 14"
+      fill="none"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="1"
+    ></polyline>
+  </svg>
+</template>
+
+<script>
+export default {
+  name: 'CalendarCheckIcon'
+};
+</script>

@@ -11,8 +11,8 @@
       width="7"
       height="9"
       rx="1"
-      :fill="fill"
-      :stroke="stroke"
+      fill="none"
+      stroke="currentColor"
       stroke-linecap="round"
       stroke-linejoin="round"
       stroke-width="1.5"
@@ -23,8 +23,8 @@
       width="7"
       height="5"
       rx="1"
-      :fill="fill"
-      :stroke="stroke"
+      fill="none"
+      stroke="currentColor"
       stroke-linecap="round"
       stroke-linejoin="round"
       stroke-width="1.5"
@@ -35,8 +35,8 @@
       width="7"
       height="5"
       rx="1"
-      :fill="fill"
-      :stroke="stroke"
+      fill="none"
+      stroke="currentColor"
       stroke-linecap="round"
       stroke-linejoin="round"
       stroke-width="1.5"
@@ -47,8 +47,8 @@
       width="7"
       height="9"
       rx="1"
-      :fill="fill"
-      :stroke="stroke"
+      fill="none"
+      stroke="currentColor"
       stroke-linecap="round"
       stroke-linejoin="round"
       stroke-width="1.5"
@@ -58,16 +58,6 @@
 
 <script>
 export default {
-  name: 'DashboardIcon',
-  props: {
-    fill: {
-      type: String,
-      default: 'none'
-    },
-    stroke: {
-      type: String,
-      default: 'currentColor'
-    }
-  }
+  name: 'DashboardIcon'
 };
 </script>

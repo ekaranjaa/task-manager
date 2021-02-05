@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import Logo from './Logo.vue';
+import Logo from '../Icons/Logo.vue';
 
 export default {
   name: 'MiniNav',

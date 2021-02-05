@@ -7,8 +7,8 @@
   >
     <polyline
       points="14 5 21 12 14 19"
-      :fill="fill"
-      :stroke="stroke"
+      fill="none"
+      stroke="currentColor"
       stroke-linecap="round"
       stroke-linejoin="round"
       stroke-width="1.5"
@@ -18,8 +18,8 @@
       y1="12"
       x2="3"
       y2="12"
-      :fill="fill"
-      :stroke="stroke"
+      fill="none"
+      stroke="currentColor"
       stroke-linecap="round"
       stroke-linejoin="round"
       stroke-width="1.5"
@@ -29,16 +29,6 @@
 
 <script>
 export default {
-  name: 'RightArrow',
-  props: {
-    fill: {
-      type: String,
-      default: 'none'
-    },
-    stroke: {
-      type: String,
-      default: 'currentColor'
-    }
-  }
+  name: 'RightArrowIcon'
 };
 </script>

@@ -7,13 +7,13 @@
       >
         <logo />
       </nuxt-link>
-      <nuxt-link to="/auth/login" class="text-blue-500"> Login </nuxt-link>
+      <nuxt-link to="/login" class="text-blue-500"> Login </nuxt-link>
     </div>
   </nav>
 </template>
 
 <script>
-import Logo from './Logo.vue';
+import Logo from '../Icons/Logo.vue';
 
 export default {
   name: 'Navbar',

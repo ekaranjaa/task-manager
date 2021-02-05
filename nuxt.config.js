@@ -103,7 +103,37 @@ export default {
   },
 
   router: {
-    // middleware: ['auth']
+    middleware: ['auth']
+  },
+
+  auth: {
+    redirect: {
+      login: '/login',
+      logout: '/login',
+      callback: '/login',
+      home: '/dashboard'
+    },
+    strategies: {
+      local: {
+        endpoints: {
+          login: {
+            url: '/auth/login',
+            method: 'post'
+          },
+          user: {
+            url: '/auth/user',
+            method: 'get'
+          },
+          logout: {
+            url: '/auth/logout',
+            method: 'post'
+          }
+        },
+        user: {
+          property: 'data'
+        }
+      }
+    }
   },
 
   server: {

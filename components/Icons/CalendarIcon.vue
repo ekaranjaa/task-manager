@@ -6,43 +6,39 @@
     viewBox="0 0 24 24"
   >
     <path
-      d="M18,4a1,1,0,0,1,1,1V20a1,1,0,0,1-1,1H6a1,1,0,0,1-1-1V5A1,1,0,0,1,6,4"
-      :fill="fill"
-      stroke="currentColor"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      stroke-width="1.5"
-    ></path>
-    <rect
-      x="9"
-      y="3"
-      width="6"
-      height="3"
-      rx="1"
+      d="M3,10H21a0,0,0,0,1,0,0V20a1,1,0,0,1-1,1H4a1,1,0,0,1-1-1V10A0,0,0,0,1,3,10Z"
       fill="none"
       stroke="currentColor"
       stroke-linecap="round"
       stroke-linejoin="round"
       stroke-width="1.5"
-    ></rect>
+    ></path>
+    <path
+      d="M4,5H20a1,1,0,0,1,1,1v4a0,0,0,0,1,0,0H3a0,0,0,0,1,0,0V6A1,1,0,0,1,4,5Z"
+      fill="none"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="1.5"
+    ></path>
     <line
-      x1="9"
-      y1="11"
-      x2="15"
-      y2="11"
-      :fill="fill"
-      :stroke="stroke"
+      x1="16"
+      y1="3"
+      x2="16"
+      y2="7"
+      fill="none"
+      stroke="currentColor"
       stroke-linecap="round"
       stroke-linejoin="round"
       stroke-width="1.5"
     ></line>
     <line
-      x1="9"
-      y1="15"
-      x2="15"
-      y2="15"
-      :fill="fill"
-      :stroke="stroke"
+      x1="8"
+      y1="3"
+      x2="8"
+      y2="7"
+      fill="none"
+      stroke="currentColor"
       stroke-linecap="round"
       stroke-linejoin="round"
       stroke-width="1.5"
@@ -52,16 +48,6 @@
 
 <script>
 export default {
-  name: 'Task',
-  props: {
-    fill: {
-      type: String,
-      default: 'none'
-    },
-    stroke: {
-      type: String,
-      default: 'currentColor'
-    }
-  }
+  name: 'CalendarIcon'
 };
 </script>

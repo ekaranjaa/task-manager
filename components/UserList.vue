@@ -1,6 +1,6 @@
 <template>
   <div
-    class="sticky top-0 right-0 h-screen border-l bg-white overflow-x-hidden overflow-y-auto"
+    class="sticky top-0 right-0 md:h-screen border-l bg-white overflow-x-hidden overflow-y-auto"
   >
     <div class="p-4 sticky top-0 border-b">
       <p class="text-lg">Users</p>
@@ -33,7 +33,7 @@
       </div>
       <div v-if="user.tasks" class="mt-2 flex items-center text-xs">
         <p class="mr-2">
-          Pending: {{ filterTasks(user.tasks, 'underway').length }}
+          Pending: {{ filterTasks(user.tasks, 'pending').length }}
         </p>
         <p class="mr-2">
           Complete: {{ filterTasks(user.tasks, 'complete').length }}

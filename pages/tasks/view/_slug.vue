@@ -27,7 +27,7 @@
         </div>
         <p class="leading-7">{{ task.description }}</p>
         <div
-          v-if="task.time_stamps.assigned_on && task.status === 'underway'"
+          v-if="task.time_stamps.assigned_on && task.status === 'pending'"
           class="mt-8 flex items-center"
         >
           <button
@@ -130,7 +130,7 @@ export default {
 </script>
 
 <style scoped>
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 768px) {
   .wrapper {
     grid-template-columns: auto 300px;
   }

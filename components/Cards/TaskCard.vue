@@ -41,14 +41,15 @@
       {{ trimDescription(task.description) }}
     </p>
     <p
+      v-if="task.status"
       class="sticky inline-block top-full rounded-full text-xs px-2 py-1"
       :class="{
-        'bg-yellow-200 text-yellow-600': task.status === 'underway',
+        'bg-yellow-200 text-yellow-600': task.status === 'pending',
         'bg-green-200 text-green-600': task.status === 'complete',
         'bg-red-200 text-red-600': task.status === 'incomplete'
       }"
     >
-      {{ task.status }}
+      {{ capitalize(task.status) }}
     </p>
   </article>
 </template>
@@ -106,6 +107,10 @@ export default {
       }
 
       return trimmedText;
+    },
+    capitalize(text) {
+      const str = `${text.charAt(0).toUpperCase()}${text.slice(1)}`;
+      return str;
     }
   }
 };

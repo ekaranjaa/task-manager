@@ -48,39 +48,6 @@
           Joined on: {{ formatTime($auth.user.time_stamps.created_at) }}
         </p>
       </div>
-      <menu class="m-0 p-0">
-        <ul class="flex items-center overflow-y-hidden overflow-x-auto">
-          <li>
-            <button
-              class="px-4 py-2 whitespace-nowrap hover:text-blue-500 focus:text-blue-500 transition rounded-full text-blue-500 bg-blue-50"
-            >
-              All Tasks
-            </button>
-          </li>
-          <li>
-            <button
-              class="px-4 py-2 whitespace-nowrap hover:text-blue-500 focus:text-blue-500 transition rounded-full"
-            >
-              Completed Tasks
-            </button>
-          </li>
-          <li>
-            <button
-              class="px-4 py-2 whitespace-nowrap hover:text-blue-500 focus:text-blue-500 transition rounded-full"
-            >
-              Incomplete Tasks
-            </button>
-          </li>
-        </ul>
-      </menu>
-      <div class="py-4 md:grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-        <task-card
-          v-for="(task, index) in tasks"
-          :key="index"
-          :task="task"
-          class="mb-4 md:mb-0"
-        />
-      </div>
     </section>
   </div>
 </template>
@@ -88,10 +55,9 @@
 <script>
 import { mapActions } from 'vuex';
 import EditIcon from '@/components/Icons/EditIcon.vue';
-import TaskCard from '@/components/Cards/TaskCard.vue';
 
 export default {
-  components: { EditIcon, TaskCard },
+  components: { EditIcon },
   layout: 'dashboard',
   computed: {
     userAvatar() {
@@ -99,10 +65,6 @@ export default {
       const avatar = userNames[0].charAt(0) + userNames[1].charAt(0);
 
       return avatar;
-    },
-    tasks() {
-      const tasks = this.$auth.user.tasks;
-      return tasks;
     }
   },
   mounted() {

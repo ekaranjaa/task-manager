@@ -1,5 +1,5 @@
 <template>
-  <menu class="m-0 p-0">
+  <menu class="m-0 p-0 sticky top-0 md:static bg-gray-50">
     <ul
       class="p-4 w-screen md:w-auto flex md:block items-center overflow-y-hidden overflow-x-auto"
     >

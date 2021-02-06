@@ -1,4 +1,4 @@
-# Task Manager
+# Task Manager 📋
 
 Using Laravel and VueJs design and implement an appointment module that does the following:
 
@@ -8,7 +8,7 @@ Using Laravel and VueJs design and implement an appointment module that does the
 
 <img src="https://github.com/ekaranjaa/task-manager/blob/master/static/images/screenshot.png">
 
-## Build Setup
+## Build Setup ⚙️
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/4d9dc11d-35f8-4ee6-90ae-46102335b74c/deploy-status)](https://app.netlify.com/sites/taskmanagr/deploys)
 
@@ -27,4 +27,10 @@ $ yarn start
 $ yarn generate
 ```
 
+[API repo 🔃](https://github.com/ekaranjaa/task-manager-api)
+
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+
+Enjoy 🌟
+
+<p align="center">Made with ❤️ in 🇰🇪</p>

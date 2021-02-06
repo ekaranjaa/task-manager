@@ -14,9 +14,7 @@
           class="mb-4 p-4 flex items-center w-full hover:text-blue-500 focus:text-blue-500 transition"
           :class="{ 'text-blue-500 bg-blue-50': activePage === 'Dashboard' }"
         >
-          <span
-            class="mr-2 h-10 w-10 grid place-items-center rounded-full overflow-hidden"
-          >
+          <span class="mr-2 h-8 w-8 grid place-items-center overflow-hidden">
             <dashboard-icon />
           </span>
           Dashboard
@@ -28,26 +26,10 @@
           class="mb-4 p-4 flex items-center w-full hover:text-blue-500 focus:text-blue-500 transition"
           :class="{ 'text-blue-500 bg-blue-50': activePage === 'Tasks' }"
         >
-          <span
-            class="mr-2 h-10 w-10 grid place-items-center rounded-full overflow-hidden"
-          >
+          <span class="mr-2 h-8 w-8 grid place-items-center overflow-hidden">
             <task-icon />
           </span>
           Tasks
-        </nuxt-link>
-      </li>
-      <li>
-        <nuxt-link
-          to="/calendar"
-          class="mb-4 p-4 flex items-center w-full hover:text-blue-500 focus:text-blue-500 transition"
-          :class="{ 'text-blue-500 bg-blue-50': activePage === 'Calendar' }"
-        >
-          <span
-            class="mr-2 h-10 w-10 grid place-items-center rounded-full overflow-hidden"
-          >
-            <calendar-icon />
-          </span>
-          Calendar
         </nuxt-link>
       </li>
       <li>
@@ -56,9 +38,7 @@
           class="mb-4 p-4 flex items-center w-full hover:text-blue-500 focus:text-blue-500 transition"
           :class="{ 'text-blue-500 bg-blue-50': activePage === 'Profile' }"
         >
-          <span
-            class="mr-2 h-10 w-10 grid place-items-center rounded-full overflow-hidden"
-          >
+          <span class="mr-2 h-8 w-8 grid place-items-center overflow-hidden">
             <user-icon />
           </span>
           Profile
@@ -70,9 +50,7 @@
         class="mb-4 p-4 flex items-center w-full hover:text-blue-500 focus:text-blue-500 transition"
         @click="logout"
       >
-        <span
-          class="mr-2 h-10 w-10 grid place-items-center rounded-full overflow-hidden"
-        >
+        <span class="mr-2 h-8 w-8 grid place-items-center overflow-hidden">
           <sign-out-icon />
         </span>
         Sign Out
@@ -87,7 +65,6 @@ import { mapGetters, mapActions } from 'vuex';
 import DashboardIcon from '../Icons/DashboardIcon.vue';
 import Logo from '../Icons/Logo.vue';
 import TaskIcon from '../Icons/TaskIcon.vue';
-import CalendarIcon from '../Icons/CalendarIcon.vue';
 import UserIcon from '../Icons/UserIcon.vue';
 import SignOutIcon from '../Icons/SignOutIcon.vue';
 import Spinner from '../Widgets/Spinner.vue';
@@ -98,7 +75,6 @@ export default {
     Logo,
     DashboardIcon,
     TaskIcon,
-    CalendarIcon,
     UserIcon,
     SignOutIcon,
     Spinner

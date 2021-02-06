@@ -50,6 +50,8 @@
       <button
         type="submit"
         class="my-8 px-6 py-3 flex items-center w-full bg-blue-500 text-white hover:bg-yellow-400 focus:bg-yellow-400 transition outline-none"
+        :disabled="busy"
+        :class="{ 'pointer-events-none': busy }"
       >
         <p class="mx-auto">
           <span v-if="!busy"> Login </span>

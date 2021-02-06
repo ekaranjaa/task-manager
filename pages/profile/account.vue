@@ -47,11 +47,17 @@
       </div>
       <button
         type="submit"
-        class="my-8 ml-auto px-6 py-3 flex items-center bg-blue-500 text-white hover:bg-yellow-400 focus:bg-yellow-400 transition outline-none"
+        class="my-8 ml-auto px-6 py-3 flex items-center text-white transition outline-none"
+        :disabled="!criteria || busy"
+        :class="{
+          'bg-blue-500 text-white hover:bg-yellow-400 focus:bg-yellow-400': criteria,
+          'bg-gray-500 pointer-events-none': !criteria,
+          'pointer-events-none': busy
+        }"
       >
         <p class="mx-auto">
-          <span v-if="!busy"> Save Changes</span>
-          <span v-if="busy"> A moment please...</span>
+          <span v-if="!busy"> Save Changes </span>
+          <span v-if="busy"> A moment please... </span>
         </p>
         <spinner v-if="busy" class="ml-auto" />
       </button>
@@ -80,7 +86,19 @@ export default {
     ...mapGetters({
       busy: 'authentication/busy',
       serverErrors: 'authentication/errors'
-    })
+    }),
+    criteria() {
+      let passed = true;
+
+      if (
+        this.data.name === this.$auth.user.name &&
+        this.data.email === this.$auth.user.email
+      ) {
+        passed = false;
+      }
+
+      return passed;
+    }
   },
   mounted() {
     this.setActivePage('Account');

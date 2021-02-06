@@ -1,7 +1,7 @@
 <template>
   <div class="container mx-auto">
-    <title-bar page-title="New Task" back />
-    <div class="px-8 py-4">
+    <title-bar page-title="Edit Task" back />
+    <div v-if="task" class="px-8 py-4">
       <form
         autocomplete="off"
         class="mx-auto max-w-2xl"
@@ -53,7 +53,7 @@
           :class="{ 'pointer-events-none': busy }"
         >
           <p class="mx-auto">
-            <span v-if="!busy"> Save Task </span>
+            <span v-if="!busy"> Save Changes </span>
             <span v-if="busy"> A moment please...</span>
           </p>
           <spinner v-if="busy" class="ml-auto" />
@@ -85,11 +85,13 @@ export default {
   },
   computed: {
     ...mapGetters({
+      task: 'tasks/task',
       busy: 'tasks/busy',
       serverErrors: 'tasks/errors'
     })
   },
   created() {
+    this.getTask(this.$route.params.id).then(() => this.setTask());
     this.clearServerErrors();
   },
   mounted() {
@@ -98,9 +100,14 @@ export default {
   methods: {
     ...mapActions({
       setActivePage: 'ui/setActivePage',
-      create: 'tasks/create',
+      getTask: 'tasks/getById',
+      update: 'tasks/update',
       clearServerErrors: 'tasks/clearErrors'
     }),
+    setTask() {
+      this.data.title = this.task.title;
+      this.data.description = this.task.description;
+    },
     clearErrors() {
       for (const error in this.errors) {
         this.errors[error] = null;
@@ -128,11 +135,7 @@ export default {
 
       if (!valid) return;
 
-      this.create(this.data).then(() => {
-        for (const rec in this.data) {
-          this.data[rec] = null;
-        }
-      });
+      this.update({ id: this.task.id, task: this.data });
     }
   }
 };

@@ -5,22 +5,22 @@
     >
       <li>
         <nuxt-link
-          to="/profile/availability"
+          to="/profile/account"
+          class="md:mb-4 px-4 py-2 hover:text-blue-500 focus:text-blue-500 transition whitespace-nowrap md:block rounded-full"
+          :class="{ 'bg-blue-100 text-blue-500': activePage === 'Account' }"
+        >
+          Account
+        </nuxt-link>
+      </li>
+      <li>
+        <nuxt-link
+          to="/availability/update"
           class="md:mb-4 px-4 py-2 hover:text-blue-500 focus:text-blue-500 transition whitespace-nowrap md:block rounded-full"
           :class="{
             'bg-blue-100 text-blue-500': activePage === 'Availability'
           }"
         >
           Availability
-        </nuxt-link>
-      </li>
-      <li>
-        <nuxt-link
-          to="/profile/info"
-          class="md:mb-4 px-4 py-2 hover:text-blue-500 focus:text-blue-500 transition whitespace-nowrap md:block rounded-full"
-          :class="{ 'bg-blue-100 text-blue-500': activePage === 'Account' }"
-        >
-          Profile
         </nuxt-link>
       </li>
       <li>

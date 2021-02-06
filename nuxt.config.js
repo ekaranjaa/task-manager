@@ -103,7 +103,7 @@ export default {
   },
 
   router: {
-    middleware: ['auth']
+    middleware: ['auth', 'hasAvailability']
   },
 
   auth: {

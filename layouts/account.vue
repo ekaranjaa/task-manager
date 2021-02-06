@@ -3,7 +3,7 @@
     <div class="board lg:grid">
       <sidebar />
       <div class="mb-16 lg:mb-0">
-        <title-bar page-title="Edit Profile" />
+        <title-bar page-title="Edit Profile" back />
         <div class="mx-auto max-w-2xl">
           <div class="edit-board grid">
             <profile-menu />

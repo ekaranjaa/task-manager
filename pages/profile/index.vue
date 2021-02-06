@@ -26,17 +26,27 @@
           <p class="text-lg">{{ $auth.user.email }}</p>
         </div>
         <nuxt-link
-          to="/profile/availability"
+          to="/profile/account"
           class="my-4 md:my-0 px-6 py-3 inline-flex items-center bg-blue-500 text-white hover:bg-yellow-400 focus:bg-yellow-400 transition"
         >
-          <span class="mr-2 h-6 w-6 grid place-items-center transition-all">
+          <span class="mr-2 h-5 w-5 grid place-items-center transition-all">
             <edit-icon />
           </span>
           Edit Profile
         </nuxt-link>
       </div>
-      <div v-if="$auth.user.role.name === 'admin'" class="mb-4">
-        <p>Joined on: {{ $auth.user.time_stamps.created_at }}</p>
+      <div class="mb-4">
+        <p class="mb-2 text-lg">Availability</p>
+        <p class="mb-2 text-sm">
+          <span> From: {{ $auth.user.availability.from }} </span>
+          <span> To: {{ $auth.user.availability.to }} </span>
+          <span v-if="$auth.user.availability.weekend">
+            - Plus half a day on weekends.
+          </span>
+        </p>
+        <p v-if="$auth.user.role.name === 'admin'" class="text-xs">
+          Joined on: {{ formatTime($auth.user.time_stamps.created_at) }}
+        </p>
       </div>
       <menu class="m-0 p-0">
         <ul class="flex items-center overflow-y-hidden overflow-x-auto">
@@ -63,10 +73,12 @@
           </li>
         </ul>
       </menu>
-      <div class="text-red-200">
-        <div v-for="(task, index) in tasks" :key="index">
-          {{ task }}
-        </div>
+      <div
+        v-for="(task, index) in tasks"
+        :key="index"
+        class="py-4 md:grid md:grid-cols-2 lg:grid-cols-3 gap-5"
+      >
+        <task-card :task="task" class="mb-4 md:mb-0" />
       </div>
     </section>
   </div>
@@ -75,9 +87,10 @@
 <script>
 import { mapActions } from 'vuex';
 import EditIcon from '@/components/Icons/EditIcon.vue';
+import TaskCard from '@/components/Cards/TaskCard.vue';
 
 export default {
-  components: { EditIcon },
+  components: { EditIcon, TaskCard },
   layout: 'dashboard',
   computed: {
     userAvatar() {
@@ -97,7 +110,20 @@ export default {
   methods: {
     ...mapActions({
       setActivePage: 'ui/setActivePage'
-    })
+    }),
+    formatTime(timeToFormat) {
+      if (!timeToFormat) return 0;
+
+      let time = new Date(timeToFormat);
+      const day = time.toLocaleDateString(time, { weekday: 'short' });
+      const month = time.toLocaleDateString(time, { month: 'short' });
+      const date = time.getDate();
+      const hours = time.toLocaleTimeString(time);
+
+      time = `${day}, ${month} ${date} - ${hours}`;
+
+      return time;
+    }
   }
 };
 </script>

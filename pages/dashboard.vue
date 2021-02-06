@@ -1,9 +1,6 @@
 <template>
   <div class="min-h-screen">
-    <title-bar />
-    <div v-if="tasks && tasks.length > 0" class="p-4">
-      <h1 class="text-xl">My Assigned Tasks</h1>
-    </div>
+    <title-bar page-title="My Assigned Tasks" />
     <section
       v-if="tasks && tasks.length > 0"
       class="p-4 md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5"
@@ -11,6 +8,7 @@
       <task-card
         v-for="(task, index) in tasks"
         :key="index"
+        :task="task"
         class="mb-4 md:mb-0"
       />
     </section>
@@ -24,29 +22,29 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
+import { mapActions } from 'vuex';
 import TitleBar from '@/components/Navigation/TitleBar.vue';
 import TaskCard from '@/components/Cards/TaskCard.vue';
 import CalendarCheckIcon from '@/components/Icons/CalendarCheckIcon.vue';
 
 export default {
-  components: { TitleBar, TaskCard, CalendarCheckIcon },
+  components: {
+    TitleBar,
+    TaskCard,
+    CalendarCheckIcon
+  },
   layout: 'dashboard',
-  computed: {
-    ...mapGetters({
-      tasks: 'tasks/tasks'
-    })
+  data() {
+    return {
+      tasks: this.$auth.user.tasks
+    };
   },
   mounted() {
     this.setActivePage('Dashboard');
   },
-  created() {
-    this.getTasks();
-  },
   methods: {
     ...mapActions({
-      setActivePage: 'ui/setActivePage',
-      getTasks: 'tasks/get'
+      setActivePage: 'ui/setActivePage'
     })
   }
 };

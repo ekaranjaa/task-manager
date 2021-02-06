@@ -3,13 +3,15 @@
 export const state = () => ({
   busy: null,
   errors: null,
-  tasks: null
+  tasks: null,
+  task: null
 });
 
 export const getters = {
   busy: state => state.busy,
   errors: state => state.errors,
-  tasks: state => state.tasks
+  tasks: state => state.tasks,
+  task: state => state.task
 };
 
 export const mutations = {
@@ -23,6 +25,10 @@ export const mutations = {
 
   SET_TASKS(state, payload) {
     state.tasks = payload;
+  },
+
+  SET_TASK(state, payload) {
+    state.task = payload;
   }
 };
 
@@ -31,25 +37,55 @@ export const actions = {
     return commit('SET_ERRORS', null);
   },
 
-  async get({ commit }) {
+  async get({ commit, getters }, refresh) {
     commit('SET_ERRORS', null);
     commit('IS_BUSY', true);
 
-    await this.$axios
-      .get('/tasks')
-      .then(res => {
-        commit('IS_BUSY', false);
-        commit('SET_TASKS', res.data.data);
-      })
-      .catch(err => {
-        commit('IS_BUSY', false);
+    let tasks;
 
-        if (err.response.status === 422) {
-          return commit('SET_ERRORS', err.response.data.errors);
-        }
+    if (getters.tasks && !refresh) {
+      tasks = getters.tasks;
+    } else {
+      await this.$axios
+        .get('/tasks')
+        .then(res => {
+          tasks = res.data.data;
+        })
+        .catch(err => {
+          if (err.response.status === 422) {
+            return commit('SET_ERRORS', err.response.data.errors);
+          }
 
-        console.warn(err);
-      });
+          console.warn(err);
+        });
+    }
+
+    commit('IS_BUSY', false);
+    commit('SET_TASKS', tasks);
+  },
+
+  async getById({ commit, dispatch, getters }, id) {
+    commit('SET_ERRORS', null);
+    commit('IS_BUSY', true);
+
+    await dispatch('get');
+    const tasks = getters.tasks;
+    const [task] = tasks.filter(task => task.id === parseInt(id));
+
+    commit('IS_BUSY', false);
+    commit('SET_TASK', task);
+  },
+
+  async getBySlug({ commit, dispatch, getters }, slug) {
+    commit('SET_ERRORS', null);
+    commit('IS_BUSY', true);
+
+    await dispatch('get');
+    const tasks = getters.tasks;
+    const [task] = tasks.filter(task => task.slug === slug);
+
+    commit('IS_BUSY', false);
+    commit('SET_TASK', task);
   },
 
   async search({ commit }, query) {
@@ -73,15 +109,15 @@ export const actions = {
       });
   },
 
-  async create({ commit }, tasks) {
+  async create({ commit, dispatch }, task) {
     commit('SET_ERRORS', null);
     commit('IS_BUSY', true);
 
     await this.$axios
-      .post('/tasks/create', tasks)
-      .then(res => {
+      .post('/tasks/create', task)
+      .then(() => {
         commit('IS_BUSY', false);
-        commit('SET_TASKS', res.data.data);
+        dispatch('get', true);
       })
       .catch(err => {
         commit('IS_BUSY', false);
@@ -94,15 +130,16 @@ export const actions = {
       });
   },
 
-  async update({ commit }, tasks) {
+  async assign({ commit, dispatch }, { id, userId }) {
     commit('SET_ERRORS', null);
     commit('IS_BUSY', true);
 
     await this.$axios
-      .put(`/tasks/${this.$auth.user.id}`, tasks)
-      .then(res => {
+      .put(`/tasks/assign/${id}`, { user_id: userId })
+      .then(async () => {
         commit('IS_BUSY', false);
-        commit('SET_TASKS', res.data.data);
+        await dispatch('get', true);
+        await dispatch('getById', id);
       })
       .catch(err => {
         commit('IS_BUSY', false);
@@ -115,17 +152,62 @@ export const actions = {
       });
   },
 
-  async delete({ commit }) {
-    if (!confirm()) return;
+  async close({ commit, dispatch }, { id, state }) {
+    commit('SET_ERRORS', null);
+    commit('IS_BUSY', true);
+
+    await this.$axios
+      .put(`/tasks/close/${id}`, { status: state })
+      .then(async () => {
+        commit('IS_BUSY', false);
+        await dispatch('get', true);
+        await dispatch('getById', id);
+      })
+      .catch(err => {
+        commit('IS_BUSY', false);
+
+        if (err.response.status === 422) {
+          return commit('SET_ERRORS', err.response.data.errors);
+        }
+
+        console.warn(err);
+      });
+  },
+
+  async update({ commit, dispatch }, { id, task }) {
+    commit('SET_ERRORS', null);
+    commit('IS_BUSY', true);
+
+    await this.$axios
+      .put(`/tasks/update/${id}`, task)
+      .then(async () => {
+        commit('IS_BUSY', false);
+        await dispatch('get', true);
+        await dispatch('getById', id);
+      })
+      .catch(err => {
+        commit('IS_BUSY', false);
+
+        if (err.response.status === 422) {
+          return commit('SET_ERRORS', err.response.data.errors);
+        }
+
+        console.warn(err);
+      });
+  },
+
+  async delete({ commit, dispatch }, id) {
+    if (!confirm('Are you sure?')) return;
 
     commit('SET_ERRORS', null);
     commit('IS_BUSY', true);
 
     await this.$axios
-      .delete(`/tasks/delete/${this.$auth.user.id}`)
-      .then(res => {
+      .delete(`/tasks/delete/${id}`)
+      .then(async () => {
         commit('IS_BUSY', false);
-        commit('SET_TASKS', res.data.data);
+        await dispatch('get', true);
+        this.$router.push('/tasks');
       })
       .catch(err => {
         commit('IS_BUSY', false);

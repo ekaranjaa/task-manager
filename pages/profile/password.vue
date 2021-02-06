@@ -11,6 +11,28 @@
         </label>
         <input
           id="currentPassword"
+          v-model="data.current_password"
+          type="password"
+          class="px-6 py-3 font-light block w-full border outline-none ring-blue-500 focus:ring-1 transition"
+          :class="{
+            'border-red-500':
+              errors.current_password ||
+              (serverErrors && serverErrors.current_password)
+          }"
+        />
+        <div class="text-sm text-red-500">
+          <span v-if="errors.current_password">{{
+            errors.current_password
+          }}</span>
+          <span v-if="serverErrors && serverErrors.current_password">
+            {{ serverErrors.current_password[0] }}
+          </span>
+        </div>
+      </div>
+      <div class="mb-4">
+        <label for="newPassword" class="block leading-8">New Password</label>
+        <input
+          id="newPassword"
           v-model="data.password"
           type="password"
           class="px-6 py-3 font-light block w-full border outline-none ring-blue-500 focus:ring-1 transition"
@@ -23,25 +45,6 @@
           <span v-if="errors.password">{{ errors.password }}</span>
           <span v-if="serverErrors && serverErrors.password">
             {{ serverErrors.password[0] }}
-          </span>
-        </div>
-      </div>
-      <div class="mb-4">
-        <label for="newPassword" class="block leading-8">New Password</label>
-        <input
-          id="newPassword"
-          v-model="data.new_password"
-          type="password"
-          class="px-6 py-3 font-light block w-full border outline-none ring-blue-500 focus:ring-1 transition"
-          :class="{
-            'border-red-500':
-              errors.new_password || (serverErrors && serverErrors.new_password)
-          }"
-        />
-        <div class="text-sm text-red-500">
-          <span v-if="errors.new_password">{{ errors.new_password }}</span>
-          <span v-if="serverErrors && serverErrors.new_password">
-            {{ serverErrors.new_password[0] }}
           </span>
         </div>
       </div>
@@ -71,7 +74,13 @@
       </div>
       <button
         type="submit"
-        class="my-8 ml-auto px-6 py-3 flex items-center bg-blue-500 text-white hover:bg-yellow-400 focus:bg-yellow-400 transition outline-none"
+        class="my-8 ml-auto px-6 py-3 text-white flex items-center transition outline-none"
+        :disabled="!criteria || busy"
+        :class="{
+          'bg-blue-500 text-white hover:bg-yellow-400 focus:bg-yellow-400': criteria,
+          'bg-gray-500 pointer-events-none': !criteria,
+          'pointer-events-none': busy
+        }"
       >
         <p class="mx-auto">
           <span v-if="!busy"> Change Password </span>
@@ -91,13 +100,13 @@ export default {
   data() {
     return {
       data: {
+        current_password: null,
         password: null,
-        new_password: null,
         password_confirmation: null
       },
       errors: {
+        current_password: null,
         password: null,
-        new_password: null,
         password_confirmation: null
       }
     };
@@ -106,7 +115,20 @@ export default {
     ...mapGetters({
       busy: 'authentication/busy',
       serverErrors: 'authentication/errors'
-    })
+    }),
+    criteria() {
+      let passed = true;
+
+      if (
+        !this.data.current_password &&
+        !this.data.password &&
+        !this.data.password_confirmation
+      ) {
+        passed = false;
+      }
+
+      return passed;
+    }
   },
   mounted() {
     this.setActivePage('Password');
@@ -135,18 +157,23 @@ export default {
         valid = false;
       }
 
-      if (!this.data.new_password) {
-        this.errors.new_password = 'Required.';
+      if (!this.data.current_password) {
+        this.errors.current_password = 'Required.';
         valid = false;
-      } else if (this.data.new_password.length < 8) {
-        this.errors.new_password = 'Minimum of 8 characters required.';
+      }
+
+      if (!this.data.password) {
+        this.errors.password = 'Required.';
+        valid = false;
+      } else if (this.data.password.length < 8) {
+        this.errors.password = 'Minimum of 8 characters required.';
         valid = false;
       }
 
       if (!this.data.password_confirmation) {
         this.errors.password_confirmation = 'Required.';
         valid = false;
-      } else if (this.data.password_confirmation !== this.data.new_password) {
+      } else if (this.data.password_confirmation !== this.data.password) {
         this.errors.password_confirmation = "Passwords didn't match.";
         valid = false;
       }
@@ -158,7 +185,11 @@ export default {
 
       if (!valid) return;
 
-      this.update(this.data);
+      this.update(this.data).then(() => {
+        for (const rec in this.data) {
+          this.data[rec] = null;
+        }
+      });
     }
   }
 };

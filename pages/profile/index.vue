@@ -73,12 +73,13 @@
           </li>
         </ul>
       </menu>
-      <div
-        v-for="(task, index) in tasks"
-        :key="index"
-        class="py-4 md:grid md:grid-cols-2 lg:grid-cols-3 gap-5"
-      >
-        <task-card :task="task" class="mb-4 md:mb-0" />
+      <div class="py-4 md:grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <task-card
+          v-for="(task, index) in tasks"
+          :key="index"
+          :task="task"
+          class="mb-4 md:mb-0"
+        />
       </div>
     </section>
   </div>

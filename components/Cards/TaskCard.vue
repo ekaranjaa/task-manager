@@ -1,5 +1,5 @@
 <template>
-  <article class="p-4 bg-white border rounded-lg">
+  <article class="p-4 relative bg-white border rounded-lg">
     <div class="mb-2 flex items-center justify-between">
       <p :title="task.title" class="text-lg whitespace-nowrap">
         {{ trimTitle(task.title) }}
@@ -13,11 +13,7 @@
           <view-icon />
         </nuxt-link>
         <div
-          v-if="
-            $auth.user.role.name === 'admin' &&
-            !task.time_stamps.closed_on &&
-            task.status === 'underway'
-          "
+          v-if="$auth.user.role.name === 'admin' && !task.time_stamps.closed_on"
           class="flex items-center"
         >
           <nuxt-link
@@ -41,8 +37,18 @@
         </div>
       </div>
     </div>
-    <p class="text-sm leading-6">
+    <p class="mb-2 text-sm leading-6">
       {{ trimDescription(task.description) }}
+    </p>
+    <p
+      class="sticky inline-block top-full rounded-full text-xs px-2 py-1"
+      :class="{
+        'bg-yellow-200 text-yellow-600': task.status === 'underway',
+        'bg-green-200 text-green-600': task.status === 'complete',
+        'bg-red-200 text-red-600': task.status === 'incomplete'
+      }"
+    >
+      {{ task.status }}
     </p>
   </article>
 </template>

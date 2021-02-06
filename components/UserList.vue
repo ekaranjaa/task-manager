@@ -33,7 +33,7 @@
       </div>
       <div v-if="user.tasks" class="mt-2 flex items-center text-xs">
         <p class="mr-2">
-          Pending: {{ filterTasks(user.tasks, 'pending').length }}
+          Pending: {{ filterTasks(user.tasks, 'underway').length }}
         </p>
         <p class="mr-2">
           Complete: {{ filterTasks(user.tasks, 'complete').length }}

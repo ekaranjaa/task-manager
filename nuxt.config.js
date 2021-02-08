@@ -34,24 +34,24 @@ export default {
       {
         rel: 'apple-touch-icon',
         sizes: '180x180',
-        href: '/icons/app/apple-touch-icon.png'
+        href: '/icons/apple-touch-icon.png'
       },
       {
         rel: 'icon',
         type: 'image/png',
         sizes: '32x32',
-        href: '/icons/app/favicon-32x32.png'
+        href: '/icons/favicon-32x32.png'
       },
       {
         rel: 'icon',
         type: 'image/png',
         sizes: '16x16',
-        href: '/icons/app/favicon-16x16.png'
+        href: '/icons/favicon-16x16.png'
       },
       {
         rel: 'mask-icon',
         color: '#3b83f5',
-        href: '/icons/app/safari-pinned-tab.svg'
+        href: '/icons/safari-pinned-tab.svg'
       }
     ]
   },
@@ -73,8 +73,8 @@ export default {
           type: 'image/png'
         },
         {
-          src: '/icons/android-chrome-384x384.png',
-          sizes: '384x384',
+          src: '/icons/android-chrome-512x512.png',
+          sizes: '512x512',
           type: 'image/png'
         }
       ]
